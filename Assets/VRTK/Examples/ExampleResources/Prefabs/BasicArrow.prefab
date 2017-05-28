@@ -472,6 +472,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxArrowLife: 10
   inFlight: 0
+  Tip: {fileID: 433838}
 --- !u!114 &11494472
 MonoBehaviour:
   m_ObjectHideFlags: 1

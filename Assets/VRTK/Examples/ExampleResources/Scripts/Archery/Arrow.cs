@@ -8,6 +8,8 @@
         [HideInInspector]
         public bool inFlight = false;
 
+		public Transform Tip;
+
         private bool collided = false;
         private Rigidbody rigidBody;
         private GameObject arrowHolder;
