@@ -4,13 +4,19 @@
 
     public class BowAnimation : MonoBehaviour
     {
-        public Animation animationTimeline;
+		public Animator animator;
+		public LerpBetweenTwoPoints lerp;
 
-        public void SetFrame(float frame)
-        {
-            animationTimeline["BowPullAnimation"].speed = 0;
-            animationTimeline["BowPullAnimation"].time = frame;
-            animationTimeline.Play("BowPullAnimation");
-        }
+		public void SetDraw (float drawAmount)
+		{
+			animator.SetFloat ("DrawState", drawAmount);
+			lerp.value = drawAmount;
+		}
+
+		public void Release ()
+		{
+			animator.SetTrigger ("Release");
+			SetDraw (0f);
+		}
     }
 }
