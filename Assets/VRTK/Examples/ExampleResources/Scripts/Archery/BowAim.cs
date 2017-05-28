@@ -116,7 +116,8 @@
 
         private void Release()
         {
-            bowAnimation.SetFrame(0);
+			bowAnimation.Release();
+
             currentArrow.transform.SetParent(null);
             Collider[] arrowCols = currentArrow.GetComponentsInChildren<Collider>();
             Collider[] BowCols = GetComponentsInChildren<Collider>();
@@ -159,7 +160,8 @@
         private void PullString()
         {
             currentPull = Mathf.Clamp((Vector3.Distance(holdControl.transform.position, stringControl.transform.position) - pullOffset) * pullMultiplier, 0, maxPullDistance);
-            bowAnimation.SetFrame(currentPull);
+            
+			bowAnimation.SetDraw(currentPull);
 
             if (!currentPull.ToString("F2").Equals(previousPull.ToString("F2")))
             {
