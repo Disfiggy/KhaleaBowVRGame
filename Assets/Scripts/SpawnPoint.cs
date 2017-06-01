@@ -33,4 +33,10 @@ public class SpawnPoint : MonoBehaviour
             })
             .AddTo(this);
     }
+
+    void OnDrawGizmosSelected ()
+    {
+        Gizmos.color = Available ? Color.green / 2f : Color.white / 2f;
+        Gizmos.DrawSphere(transform.position, 0.5f);
+    }
 }

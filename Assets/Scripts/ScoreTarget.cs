@@ -26,8 +26,9 @@ public class ScoreTarget : ArrowTarget
                 Debug.Log("Target hit. Destroying in " + _destroyDelay + " seconds");
 
                 Vector3 hitPoint = c.attachedRigidbody.GetComponentInChildren<Arrow>().Tip.position;
-                int score = CalculateScore(hitPoint);
+                hitPoint = Vector3.ProjectOnPlane(hitPoint, _scoreCenter.forward);
 
+                int score = CalculateScore(hitPoint);
 				Debug.Log("Score is " + score);
 				
                 c.attachedRigidbody.isKinematic = true;

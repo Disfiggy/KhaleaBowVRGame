@@ -98,13 +98,13 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1802383747512982}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0.17106454, y: -0.68610275, z: -0.17106454, w: 0.68610275}
   m_LocalPosition: {x: -0.087, y: 0.136, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4906876820491058}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -28, y: -90, z: 0}
 --- !u!4 &4302697433432860
 Transform:
   m_ObjectHideFlags: 1
@@ -259,5 +259,5 @@ MonoBehaviour:
     m_Bits: 256
   _destroyDelay: 2
   _scoreCenter: {fileID: 4053269098612484}
-  _scoreRadius: 0.5
+  _scoreRadius: 0.55
   _maxScore: 10
