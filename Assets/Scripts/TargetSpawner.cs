@@ -1,13 +1,11 @@
 ﻿using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using System.Linq;
 
 public class TargetSpawner : MonoBehaviour
 {
     public bool enabled = false;
-
-    [SerializeField]
-    private Bounds _spawnBounds;
 
     [SerializeField]
     private float _spawnInterval;
@@ -19,19 +17,24 @@ public class TargetSpawner : MonoBehaviour
     private GameObject _targetPrefab;
 
     [SerializeField]
-    private int _startDistance = 2;
+    private float _startDistance = 2;
+
+    [SerializeField]
+    private float _distanceIncrease = 0.5f;
 
     [SerializeField]
     private int _maxTargets = 3;
 
-    private int _currentDistance;
+    private float _currentDistance;
 
+    private List<SpawnPoint> _spawnPoints = new List<SpawnPoint>();
     private List<ArrowTarget> _targets = new List<ArrowTarget>();
 
     // Use this for initialization
     void Start ()
     {
-        _spawnBounds.center = transform.position;
+        _spawnPoints = FindObjectsOfType<SpawnPoint>().ToList();
+
         _currentDistance = _startDistance;
 
         Observable.Interval(System.TimeSpan.FromSeconds(_spawnInterval))
@@ -49,19 +52,20 @@ public class TargetSpawner : MonoBehaviour
 
     void SpawnTarget ()
     {
-        Vector2 random = Random.insideUnitCircle.normalized;
-        Vector3 pos = _spawnBounds.ClosestPoint(new Vector3(random.x, 0f, random.y) * _currentDistance);
-        Quaternion rot = Quaternion.LookRotation(_lookAtTarget.position - pos, Vector3.up);
+        Vector3 pos = GetRandomAvailableSpawnPointWithinDistance(_currentDistance).transform.position;
+        Quaternion rot = Quaternion.LookRotation(_lookAtTarget.position - new Vector3(pos.x, 0f, pos.z), Vector3.up);
 
         ArrowTarget target = Instantiate<GameObject>(_targetPrefab, pos, rot).GetComponent<ArrowTarget>();
-        target.TargetHit.Subscribe(_ => _currentDistance++).AddTo(this);
-        target.TargetDestroyed.Subscribe(t => _targets.Remove(t));
+        target.TargetHit.Subscribe(_ => _currentDistance += _distanceIncrease).AddTo(this);
+        target.TargetDestroyed.Subscribe(t => _targets.Remove(t)).AddTo(this);
+
         _targets.Add(target);
     }
 
-    void OnDrawGizmos ()
+    SpawnPoint GetRandomAvailableSpawnPointWithinDistance (float distance)
     {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireCube(transform.position, _spawnBounds.size);
+        List<SpawnPoint> validSpawnPoints = _spawnPoints.FindAll(sp => sp.Available && sp.transform.position.sqrMagnitude <= distance * distance);
+
+        return validSpawnPoints[Random.Range(0, validSpawnPoints.Count)];
     }
 }
