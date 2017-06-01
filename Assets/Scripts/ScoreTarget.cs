@@ -23,12 +23,12 @@ public class ScoreTarget : ArrowTarget
     {
 		TargetHit.Subscribe(c =>
             {
-                Debug.Log("Target hit. Destroying in " + _destroyDelay + " seconds");
-
                 Vector3 hitPoint = c.attachedRigidbody.GetComponentInChildren<Arrow>().Tip.position;
-                hitPoint = Vector3.ProjectOnPlane(hitPoint, _scoreCenter.forward);
+				hitPoint = Vector3.ProjectOnPlane(hitPoint - _scoreCenter.position, _scoreCenter.forward);
 
-                int score = CalculateScore(hitPoint);
+				Debug.Log("Target hit at " + hitPoint + ". Center is at " + _scoreCenter.position + ". Destroying target in " + _destroyDelay + " seconds");
+
+				int score = CalculateScore(hitPoint);
 				Debug.Log("Score is " + score);
 				
                 c.attachedRigidbody.isKinematic = true;
@@ -48,7 +48,13 @@ public class ScoreTarget : ArrowTarget
 
     int CalculateScore (Vector3 hitPoint)
     {
-        return Mathf.FloorToInt(Mathf.Lerp(_maxScore, 0, Vector3.Distance(_scoreCenter.position, hitPoint) / _scoreRadius));
+		float dist = hitPoint.magnitude;
+		float div = dist / _scoreRadius;
+		float lerp = Mathf.Lerp (_maxScore, 0, div);
+
+		Debug.Log ("Distance: " + dist + "\nNormalized: " + div + "\nFinal score: " + lerp);
+
+		return Mathf.RoundToInt(lerp);
     }
 
 	void OnDrawGizmos ()

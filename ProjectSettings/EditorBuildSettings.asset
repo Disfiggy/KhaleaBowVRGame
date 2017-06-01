@@ -10,4 +10,7 @@ EditorBuildSettings:
     guid: 83536cb03580c354eaf2cdde311975aa
   - enabled: 1
     path: Assets/Scenes/Sinkkhole.unity
+    guid: 486981e3763b90340aceb30e8adde59a
+  - enabled: 1
+    path: Assets/Scenes/Pillarsa.unity
     guid: 00000000000000000000000000000000
