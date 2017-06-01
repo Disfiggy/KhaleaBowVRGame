@@ -52,12 +52,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enabled: 0
-  _spawnBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 9, y: 1, z: 9}
   _spawnInterval: 5
   _lookAtTarget: {fileID: 4090910064463958}
   _targetPrefab: {fileID: 1995178086071534, guid: c366eb06a6ac3bb43bb7a062621c18d5,
     type: 2}
-  _startDistance: 2
+  _startDistance: 5
+  _distanceIncrease: 0.5
   _maxTargets: 3

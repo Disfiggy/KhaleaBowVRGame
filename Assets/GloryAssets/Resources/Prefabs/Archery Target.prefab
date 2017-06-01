@@ -84,7 +84,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4302697433432860}
   - component: {fileID: 54556401894894084}
-  - component: {fileID: 114863862294086354}
+  - component: {fileID: 114997810282314330}
   m_Layer: 9
   m_Name: Archery Target
   m_TagString: Untagged
@@ -243,7 +243,7 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300000, guid: a0b25931487706442a67ac7da863f360, type: 3}
---- !u!114 &114863862294086354
+--- !u!114 &114997810282314330
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -251,13 +251,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1995178086071534}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a727dc915b1ad0645b7e82e85d5ff9cf, type: 3}
+  m_Script: {fileID: 11500000, guid: 70fd6b732dd51ab42a0600570575a26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _targetLayers:
     serializedVersion: 2
     m_Bits: 256
-  _delay: 2
+  _destroyDelay: 2
   _scoreCenter: {fileID: 4053269098612484}
-  _scoreRadius: 0.6
+  _scoreRadius: 0.5
   _maxScore: 10
